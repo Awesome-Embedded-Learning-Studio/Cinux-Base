@@ -94,7 +94,7 @@ constexpr const char* error_string(Error e) {
  * @endcode
  */
 template <typename T>
-class ErrorOr {
+class [[nodiscard]] ErrorOr {
     // Union with trivial ctor/dtor — lifetime managed by ErrorOr.
     union Storage {
         T     value_;
@@ -207,7 +207,7 @@ private:
 
 /** @brief Specialization for operations that can fail but return no value. */
 template <>
-class ErrorOr<void> {
+class [[nodiscard]] ErrorOr<void> {
 public:
     /** @brief Success. */
     constexpr ErrorOr() : error_(Error::Ok), is_ok_(true) {}
