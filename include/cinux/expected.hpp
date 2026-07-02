@@ -37,6 +37,7 @@ enum class Error : uint32_t {
     ConnectionRefused,
     TimedOut,
     Busy,
+    Fault,  ///< Bad address (EFAULT): user pointer rejected by access_ok or copy fault
 };
 
 /** @brief Convert an Error code to a human-readable string. */
@@ -70,6 +71,8 @@ constexpr const char* error_string(Error e) {
         return "TimedOut";
     case Error::Busy:
         return "Busy";
+    case Error::Fault:
+        return "Fault";
     }
     return "Unknown";
 }
